@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'question1_screen.dart';
+import 'result_screen.dart';
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+class MemeTestStartScreen extends StatelessWidget {
+  const MemeTestStartScreen({super.key});
 
-  void _startQuiz(BuildContext context) {
+  void _startTest(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const Question1Screen()),
+      MaterialPageRoute(builder: (context) => const MemeTestResultScreen()),
     );
   }
 
@@ -16,7 +16,7 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Какой ты сегодня котенок?"),
+        title: const Text("Тест на знание мемов"),
         backgroundColor: Colors.blue[700],
       ),
       body: Center(
@@ -26,7 +26,7 @@ class StartScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CachedNetworkImage(
-                imageUrl: 'https://avatars.mds.yandex.net/get-games/1881371/2a0000017d817bb36ce21a29b663f02a6118/default526x314',
+                imageUrl: 'https://avatars.mds.yandex.net/get-games/1892995/2a000001815c30e1fce072fcb2fc693ffcde/default526x314',
                 placeholder: (context, url) => const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 height: 200,
@@ -34,13 +34,13 @@ class StartScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                "Какой ты сегодня котенок?",
+                "Тест на знание мемов",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               const Text(
-                "Пройди этот веселый тест и узнай, какой ты пушистик сегодня!",
+                "Проверь, насколько ты в теме интернет-культуры!",
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
@@ -49,7 +49,7 @@ class StartScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () => _startQuiz(context),
+                  onPressed: () => _startTest(context),
                   child: const Text(
                     "Начать тест",
                     style: TextStyle(fontSize: 18),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../widgets/rating_review_screen.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -22,7 +23,8 @@ class ResultScreen extends StatelessWidget {
         'description': 'Твой главный девиз сегодня: "Не трогай меня, человек". '
             'Ты ищешь уединения, теплой лежанки и полного покоя. '
             'Лучший вечер — это когда тебя никто не беспокоит. '
-            'Отдохни и наберись сил, завтра будет новый день!'
+            'Отдохни и наберись сил, завтра будет новый день!',
+        'imageUrl': 'https://i.pinimg.com/originals/8e/04/38/8e04382a63de5912aaef31d31a2e73ce.jpg',
       };
     } else if (totalScore <= 4) {
       return {
@@ -30,15 +32,17 @@ class ResultScreen extends StatelessWidget {
         'description': 'Ты мастерски балансируешь между общением и уединением. '
             'Ты где-то тут, но ненадолго. Ты не против компании, '
             'но и одиноко тебе не бывает. Ты плывешь по течению дня, '
-            'сохраняя загадочное спокойствие и независимость.'
+            'сохраняя загадочное спокойствие и независимость.',
+        'imageUrl': 'https://avatars.mds.yandex.net/i?id=4466e9be31116d9141eb82447c309db941300a57-5354312-images-thumbs&n=13',
       };
     } else if (totalScore <= 8) {
       return {
         'text': 'ИГРИВЫЙ И ЛЮБОЗНАТЕЛЬНЫЙ КОТЕНОК! 🐱‍🚀',
-        'description': 'Мир полон загадок, и ты жаждешь их разгадать! '
+        'description': 'Мир полен загадок, и ты жаждешь их разгадать! '
             'Сегодня ты полон энергии, готов к новым открытиям и приключениям '
             '(даже если это просто новый маршрут до работы). '
-            'Твое любопытство — твой главный проводник. Не забудь поиграть!'
+            'Твое любопытство — твой главный проводник. Не забудь поиграть!',
+        'imageUrl': 'https://www.kiwoko.com/blogmundoanimal/wp-content/uploads/2024/10/estimular-instinto-felino.jpg',
       };
     } else {
       return {
@@ -46,7 +50,8 @@ class ResultScreen extends StatelessWidget {
         'description': 'Ты просто лучик солнца в пушистой шкурке! '
             'Тебе хочется мурлыкать, ластиться ко всем и дарить хорошее настроение. '
             'Ты открыт к общению, готов помочь и просто заряжаешь всех вокруг '
-            'своей позитивной энергией. Поделись своим теплом с миром!'
+            'своей позитивной энергией. Поделись своим теплом с миром!',
+        'imageUrl': 'https://i.pinimg.com/736x/e3/0e/5d/e30e5d0dbd1d812790bb2147c015fe0a.jpg',
       };
     }
   }
@@ -61,7 +66,6 @@ class ResultScreen extends StatelessWidget {
           pollCategory: pollCategory,
           pollResult: resultText,
           onComplete: () {
-            // Возвращаемся на главный экран после сохранения
             Navigator.popUntil(context, (route) => route.isFirst);
           },
         ),
@@ -89,10 +93,12 @@ class ResultScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
-              Icon(
-                Icons.pets,
-                size: 100,
-                color: Colors.blue[700],
+              CachedNetworkImage(
+                imageUrl: result['imageUrl'],
+                placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                height: 200,
+                fit: BoxFit.cover,
               ),
               const SizedBox(height: 20),
               Text(
@@ -124,7 +130,6 @@ class ResultScreen extends StatelessWidget {
                 height: 50,
                 child: TextButton(
                   onPressed: () {
-                    // Пропускаем оценку и сразу возвращаемся на главную
                     Navigator.popUntil(context, (route) => route.isFirst);
                   },
                   child: const Text(

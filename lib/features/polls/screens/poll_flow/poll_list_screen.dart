@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../polls/kitten_poll/start_screen.dart' as kitten_poll;
+import '../polls/meme_test/start_screen.dart' as meme_test;
+import '../polls/personality_test/start_screen.dart' as personality_test;
+import '../polls/digital_habits/start_screen.dart' as digital_habits;
 
 class PollListScreen extends StatelessWidget {
   final String category;
@@ -13,6 +16,11 @@ class PollListScreen extends StatelessWidget {
             'title': 'Какой ты сегодня котенок?',
             'description': 'Узнай, какой ты пушистик сегодня',
             'screen': const kitten_poll.StartScreen(),
+          },
+          {
+            'title': 'Тест на знание мемов',
+            'description': 'Проверь, насколько ты в теме интернет-культуры',
+            'screen': const meme_test.MemeTestStartScreen(),
           },
           {
             'title': 'Какой бутерброд определяет твою жизнь?',
@@ -34,6 +42,11 @@ class PollListScreen extends StatelessWidget {
       case 'personality':
         return [
           {
+            'title': 'Тест на тип личности',
+            'description': 'Узнай свой психологический тип',
+            'screen': const personality_test.PersonalityTestStartScreen(),
+          },
+          {
             'title': 'Тест Майерс-Бриггс',
             'description': 'Определи свой тип личности из 16 возможных вариантов',
           },
@@ -49,13 +62,14 @@ class PollListScreen extends StatelessWidget {
             'title': 'Тест на уровень стресса',
             'description': 'Узнай, насколько стресс влияет на твою жизнь',
           },
-          {
-            'title': 'Тест на тип личности по Юнгу',
-            'description': 'Определи свой психологический тип по классификации Юнга',
-          },
         ];
       case 'sociological':
         return [
+          {
+            'title': 'Опрос о цифровых привычках',
+            'description': 'Исследование использования технологий',
+            'screen': const digital_habits.DigitalHabitsStartScreen(),
+          },
           {
             'title': 'Удовлетворенность смартфонами Apple',
             'description': 'Помоги улучшить продукты Apple, поделись своим опытом',
@@ -111,7 +125,6 @@ class PollListScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => poll['screen']),
                   );
                 } else {
-                  // Для заглушек показываем сообщение
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Этот опрос находится в разработке')),
                   );
